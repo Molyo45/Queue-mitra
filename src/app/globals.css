@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Queue Mitra design tokens — modern campus-service visual style
+   --------------------------------------------------------------- */
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Brand — friendly indigo (trustworthy civic/campus service) */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+
+  /* Ink — slate-like neutrals */
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  /* App background */
+  --color-canvas: #f5f6fb;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Visible, consistent keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Gentle pulse for "your turn" urgency (disabled under reduced motion) */
+@utility animate-urgent {
+  animation: qm-urgent 1.6s ease-in-out infinite;
+}
+
+@keyframes qm-urgent {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(239 68 68 / 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgb(239 68 68 / 0);
+  }
+}
+
+/* Printing QR posters: hide chrome, keep the QR cards */
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
